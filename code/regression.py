@@ -9,8 +9,10 @@ import random
 class RegressionModel:
     # Traing set proportion
     TRAINING_SIZE = 0.8
-    # Serialization file
-    SERIALIZATION_FILE = "../data/regression_model"
+    # Serialization file for classifier
+    SERIALIZATION_FILE_CLF = "../data/regression_model_clf"
+    # Serialization file for regression
+    SERIALIZATION_FILE_LR = "../data/regression_model_lr"
     # Plot files
     ERROR_PLOT_FILENAME_REGRESSION = "prediction_error_regression.png"
     ERROR_PLOT_FILENAME_CLASSIFICATION = "prediction_error_classification.png"
@@ -233,11 +235,15 @@ class RegressionModel:
     def load(self):
         """
         Load the classifier from a binary file
+	Also load regression model is available, as it throws an error at 
+	viralityPrediction stage is not loaded here.
         """
         print "Loading regression model..."
         try:
-            with open(self.SERIALIZATION_FILE + ".pkl", "rb") as f:
+            with open(self.SERIALIZATION_FILE_CLF + ".pkl", "rb") as f:
                 self.clf = pickle.load(f)
+            with open(self.SERIALIZATION_FILE_LR + ".pkl", "rb") as f:
+                self.LR = pickle.load(f)
             return True
         except:
             print "> Could not load regression model"
@@ -247,10 +253,13 @@ class RegressionModel:
     def dump(self):
         """
         Export the classifier in a binary file
+	Also export regression model for later use.
         """
         print "Exporting regression model..."
         try:
-            with open(self.SERIALIZATION_FILE + ".pkl", "wb") as f:
+            with open(self.SERIALIZATION_FILE_CLF + ".pkl", "wb") as f:
+                pickle.dump(self.clf, f, pickle.HIGHEST_PROTOCOL)
+            with open(self.SERIALIZATION_FILE_LR + ".pkl", "wb") as f:
                 pickle.dump(self.clf, f, pickle.HIGHEST_PROTOCOL)
             return True
         except:

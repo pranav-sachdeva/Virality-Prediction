@@ -67,6 +67,7 @@ class ViralityPrediction:
 
         return values
 
+    # Never used. Needs to be used to plot Feature vs retweet_count graphs
     def score(self, expected, predicted, labels=None, showPlot=True, savePlot=False):
         if showPlot or savePlot:
             x = np.arange(len(expected))
