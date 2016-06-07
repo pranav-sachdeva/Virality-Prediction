@@ -260,7 +260,7 @@ class RegressionModel:
             with open(self.SERIALIZATION_FILE_CLF + ".pkl", "wb") as f:
                 pickle.dump(self.clf, f, pickle.HIGHEST_PROTOCOL)
             with open(self.SERIALIZATION_FILE_LR + ".pkl", "wb") as f:
-                pickle.dump(self.clf, f, pickle.HIGHEST_PROTOCOL)
+                pickle.dump(self.LR, f, pickle.HIGHEST_PROTOCOL)
             return True
         except:
             return False
